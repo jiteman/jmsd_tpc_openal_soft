@@ -88,7 +88,8 @@ set( JMSD_THIS_PROJECT_FILES_TO_REMOVE
 	"wave.cpp"
 	"wave.h"
 	"winmm.cpp"
-	"winmm.h" )
+	"winmm.h"
+	"router" )
 
 if( UNIX )
 	set( JMSD_THIS_PROJECT_FILES_TO_KEEP_LINUX
@@ -172,6 +173,16 @@ set_target_properties( ${PROJECT_NAME} PROPERTIES SOVERSION 0.1 )
 ## project target section
 set( ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR
 	"" )
+
+## project target section
+if ( UNIX )
+	list( APPEND  ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR
+		 )
+elseif( WIN32 )
+	list( APPEND ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR
+		"Winmm.lib" )
+endif()
+
 list( REMOVE_DUPLICATES ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR )
 target_link_libraries( ${PROJECT_NAME} ${${PROJECT_NAME}_DEPENDENCY_LIBS_VAR} )
 
