@@ -12,6 +12,7 @@ set( JMSD_THIS_PROJECT_SOURCE_ROOT ${JMSD_COMPONENT_SOURCE_ROOT_PATH}/include )
 ## include dependencies
 set( ${PROJECT_NAME}_DEPENDENCY_DIRS_VAR
 	${JMSD_PLATFORM_SOURCES}
+	${tpc_sdl_DEPENDENCY_DIRS}
 	${JMSD_THIS_PROJECT_SOURCE_ROOT} )
 list( REMOVE_DUPLICATES ${PROJECT_NAME}_DEPENDENCY_DIRS_VAR )
 include_directories( ${${PROJECT_NAME}_DEPENDENCY_DIRS_VAR} )
@@ -136,6 +137,8 @@ elseif( WIN32 )
 		"mixer_sse2.cpp"
 		"mixer_sse3.cpp"
 		"mixer_sse4.cpp"
+		"sdl2.cpp"
+		"sdl2.h"
 		"wasapi.cpp"
 		"wasapi.h"
 		"wave.cpp"
@@ -154,11 +157,12 @@ add_library( ${PROJECT_NAME} SHARED ${header_and_source_files} )
 ## definition section
 set( ${PROJECT_NAME}_BUILD_DEFINITIONS_VAR
 	-DJMSD_OPENAL_SHARED_INTERFACE_INTERNAL
-	-DAL_ALEXT_PROTOTYPES )
+	-DAL_ALEXT_PROTOTYPES
+	${tpc_sdl_LINK_DEFINITIONS} )
 JMSD_LIST_TO_STRING( ${PROJECT_NAME}_BUILD_DEFINITIONS_VAR )
 JMSD_STRING_REMOVE_DUPLICATES( ${PROJECT_NAME}_BUILD_DEFINITIONS_VAR )
 set( ${PROJECT_NAME}_LINK_DEFINITIONS_VAR
-	"" )
+	${tpc_sdl_LINK_DEFINITIONS} )
 JMSD_LIST_TO_STRING( ${PROJECT_NAME}_LINK_DEFINITIONS_VAR )
 JMSD_STRING_REMOVE_DUPLICATES( ${PROJECT_NAME}_LINK_DEFINITIONS_VAR )
 add_definitions( "${${PROJECT_NAME}_BUILD_DEFINITIONS_VAR}" )
@@ -172,7 +176,8 @@ set_target_properties( ${PROJECT_NAME} PROPERTIES SOVERSION 0.1 )
 
 ## project target section
 set( ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR
-	"" )
+	${tpc_sdl_DEPENDENCY_LIBS}
+	tpc_sdl )
 
 ## project target section
 if ( UNIX )
@@ -184,6 +189,8 @@ elseif( WIN32 )
 endif()
 
 list( REMOVE_DUPLICATES ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR )
+message( STATUS "[JMSD] no duplicates in ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR:" )
+
 target_link_libraries( ${PROJECT_NAME} ${${PROJECT_NAME}_DEPENDENCY_LIBS_VAR} )
 
 
