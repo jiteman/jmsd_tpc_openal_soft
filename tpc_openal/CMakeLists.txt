@@ -189,8 +189,6 @@ elseif( WIN32 )
 endif()
 
 list( REMOVE_DUPLICATES ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR )
-message( STATUS "[JMSD] no duplicates in ${PROJECT_NAME}_DEPENDENCY_LIBS_VAR:" )
-
 target_link_libraries( ${PROJECT_NAME} ${${PROJECT_NAME}_DEPENDENCY_LIBS_VAR} )
 
 
