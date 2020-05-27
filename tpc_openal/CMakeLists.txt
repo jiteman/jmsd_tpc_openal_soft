@@ -74,14 +74,25 @@ file( GLOB single_header_and_source_files
 	${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/base.*
 	${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/loopback.*
 	${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/null.*
-	${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/sdl2.* )
+	${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/sdl2.*
+	${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/wave.* )
 
 if( UNIX )
-	file( GLOB_RECURSE single_platform_header_and_source_files
-		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/*.h*
-		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/*.c*
-		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/*.h*
-		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/*.c* )
+	file( GLOB single_platform_header_and_source_files
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/alsa.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/mixer_sse.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/mixer_sse2.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/mixer_sse3.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/mixer_sse4.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/oss.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/pulseaudio.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/defs.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/hrtfbase.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/mixer_c.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/mixer_sse.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/mixer_sse2.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/mixer_sse3.*
+		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/mixer_sse41.* )
 elseif ( WIN32 )
 	file( GLOB single_platform_header_and_source_files
 		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/dsound.*
@@ -90,7 +101,6 @@ elseif ( WIN32 )
 		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/mixer_sse3.*
 		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/mixer_sse4.*
 		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/wasapi.*
-		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/wave.*
 		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/backends/winmm.*
 		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/defs.*
 		${JMSD_THIS_PROJECT_SOURCE_ROOT}/alc/mixer/hrtfbase.*
